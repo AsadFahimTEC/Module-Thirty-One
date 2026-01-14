@@ -1,10 +1,12 @@
 
-export const dynamic = 'force-dynamic';
+"use client";
 
-export default async function AboutPage() {
+// export const dynamic = 'force-dynamic';
+
+export default function AboutPage() {
 
      //* For simulating load time
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+    // await new Promise((resolve) => setTimeout(resolve, 4000));
     
     //* For simulating error
     // throw new Error("Something went wrong");
