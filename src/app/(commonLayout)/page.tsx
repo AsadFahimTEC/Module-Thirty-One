@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  // const {data} = await userService.getSession();
-  // console.log(data);
 
   return (
     <div>
