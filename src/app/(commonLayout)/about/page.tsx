@@ -1,20 +1,24 @@
 
-// "use client";
+"use client";
 
-import { blogService } from "@/services/blog.service";
+import { getBlogs } from "@/actions/blog.action";
 import { useEffect, useState } from "react";
 
 // export const dynamic = 'force-dynamic';
 
 export default function AboutPage() {
 const [data, setData] = useState();
+const [error, setError] = useState< { message: string } | null>(null);
 
 console.log(data);
+console.log(error);
 
 useEffect(() => {
     (async () => {
-        const { data } = await blogService.getBlogPosts();
+        const { data, error } = await getBlogs();
+
         setData(data);
+        setError(error);
     }) ();
 }, []);
 
