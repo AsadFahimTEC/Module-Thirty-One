@@ -2,6 +2,7 @@ import HistoryTable from "@/components/modules/user/history/HistoryTable";
 import PaginationControls from "@/components/ui/pagination-controls";
 import { blogService } from "@/services/blog.service";
 
+
 export default async function HistoryPage({
   searchParams,
 }: {
@@ -19,7 +20,7 @@ export default async function HistoryPage({
     page: 1,
     total: 0,
     totalPages: 1,
-  };
+  }
 
   return (
     <div className="p-6">

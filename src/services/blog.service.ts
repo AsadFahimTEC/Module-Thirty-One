@@ -13,16 +13,17 @@ interface ServiceOptions {
   revalidate?: number;
 }
 
-export interface BlogData {
-  title: string;
-  content: string;
-  tag?: string[];
-}
-
 interface GetBlogsParams {
   isFeatured?: boolean;
   search?: string;
   page?: string;
+  limit?: string;
+}
+
+export interface BlogData {
+  title: string;
+  content: string;
+  tag?: string[];
 }
 
 export const blogService = {
