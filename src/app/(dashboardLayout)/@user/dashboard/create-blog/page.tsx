@@ -1,8 +1,9 @@
+import { CreateBlogFormClient } from "@/components/modules/user/CreateBlog/CreateBlogFormClient";
 import { blogService } from "@/services/blog.service";
-import CreateBlogFormServer from "../../CreateBlog/CreateBlogFormServer";
+// import CreateBlogFormServer from "../../../../../components/modules/user/CreateBlog/CreateBlogFormServer";
 
 import { BlogPost } from "@/types";
-import { CreateBlogFormClient } from "../../CreateBlog/CreateBlogFormClient";
+
 
 export default async function CreateBlogPage() {
     const { data } = await blogService.getBlogPosts({}, {cache: "no-store"});
