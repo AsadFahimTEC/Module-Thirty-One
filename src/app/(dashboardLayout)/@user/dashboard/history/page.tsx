@@ -2,31 +2,39 @@ import HistoryTable from "@/components/modules/user/history/HistoryTable";
 
 import { blogService } from "@/services/blog.service";
 
-export default async function HistoryPage() {
- 
+export default async function HistoryPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ page: string }>;
+}) {
 
-  const response = await blogService.getBlogPosts();
+    const { page } = await searchParams;
+    console.log(page);
 
-  console.log(response);
+    const response = await blogService.getBlogPosts({
+        page,
+    });
 
 
-  const posts = response.data?.data || [];
 
-  console.log(posts);
 
-//   const pagination = response.data?.pagination || {
-//     limit: 10,
-//     page: 1,
-//     total: 0,
-//     totalPages: 1,
-//   };
+    const posts = response.data?.data || [];
 
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Blog Post History</h1>
-      <HistoryTable posts={posts} />
 
-      {/* <PaginationControls meta={pagination} /> */}
-    </div>
-  );
+
+    //   const pagination = response.data?.pagination || {
+    //     limit: 10,
+    //     page: 1,
+    //     total: 0,
+    //     totalPages: 1,
+    //   };
+
+    return (
+        <div className="p-6">
+            <h1 className="text-2xl font-bold mb-6">Blog Post History</h1>
+            <HistoryTable posts={posts} />
+
+            {/* <PaginationControls meta={pagination} /> */}
+        </div>
+    );
 }
