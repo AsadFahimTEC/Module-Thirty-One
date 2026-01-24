@@ -4,14 +4,14 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
+import { revalidateTag, updateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { toast } from "sonner";
 
 const API_URL = env.API_URL;
 
 export default function CreateBlogFormServer() {
-    
+
     const createBlog = async (formData: FormData) => {
         "use server";
 
@@ -23,9 +23,9 @@ export default function CreateBlogFormServer() {
             title,
             content,
             tags: tags
-            .split(",")
-            .map((item) => item.trim())
-            .filter((item)=> item!==""),
+                .split(",")
+                .map((item) => item.trim())
+                .filter((item) => item !== ""),
         };
 
         const cookieStore = await cookies();
@@ -33,16 +33,21 @@ export default function CreateBlogFormServer() {
         const res = await fetch(`${API_URL}/posts`, {
             method: "POST",
             headers: {
-            "Content-Type": "application/json",
-            Cookie: cookieStore.toString(),
+                "Content-Type": "application/json",
+                Cookie: cookieStore.toString(),
             },
 
             body: JSON.stringify(blogData),
         });
 
-       if(res.status){
-        redirect("/dashboard/create-blog?success");
-       }
+        if (res.status) {
+            redirect("/dashboard/create-blog?success");
+        }
+
+        if (res.ok) {
+            revalidateTag("blogPosts", "max");
+            // updateTag("blogPosts"); // use either one of them
+        }
 
     }
 
@@ -62,10 +67,10 @@ export default function CreateBlogFormServer() {
                             </Field>
                             <Field>
                                 <FieldLabel htmlFor="content">Content</FieldLabel>
-                                <Textarea id="content" 
+                                <Textarea id="content"
                                     name="content"
-                                    placeholder="Write your blog"
-                                    required>
+                                    placeholder="Write your blog" required
+                                >
                                 </Textarea>
                             </Field>
                             <Field>
