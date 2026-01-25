@@ -1,13 +1,13 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "./button";
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Button } from "./button";
 
 
 interface PaginationControlsProps {
@@ -20,9 +20,11 @@ interface PaginationControlsProps {
 }
 
 export default function PaginationControls({ meta }: PaginationControlsProps) {
+
   const { limit: pageSize, page: currentPage, total, totalPages } = meta;
 
   const searchParams = useSearchParams();
+  
   const router = useRouter();
 
   const navigateToPage = (page: number) => {
@@ -36,7 +38,7 @@ export default function PaginationControls({ meta }: PaginationControlsProps) {
   // * Showing 1 to 10 of 21 -> page 1
   //* Showing 11 to 20 of 21 -> page 2
 
-  const start = (currentPage - 1) * pageSize + 1;
+  const start = ( currentPage -1 ) * pageSize + 1;
   const end = Math.min(currentPage * pageSize, total);
 
 

@@ -15,6 +15,7 @@ export default async function HistoryPage({
   });
 
   const posts = response.data?.data || [];
+
   const pagination = response.data?.pagination || {
     limit: 10,
     page: 1,
@@ -26,7 +27,6 @@ export default async function HistoryPage({
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Blog Post History</h1>
       <HistoryTable posts={posts} />
-
       <PaginationControls meta={pagination} />
     </div>
   );
